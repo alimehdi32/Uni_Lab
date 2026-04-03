@@ -1,5 +1,5 @@
 import pandas as pd
-
+import numpy as np
 
 student_data = {
 "Student ID":[101,203,150,402,118,101,399,250,311,178,402,299,187,188,189,190,191,192,193,194,
@@ -44,19 +44,19 @@ None,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214
 2.9,2,3.5,4,None,3,2,3.2,2.5,3.8,None,1,4.5,3.1,3,0,None,
 3.6,2.9,2,3.5,None],
 
-"Grade":["B","A",None,"C","B","B","Z","A",None,"B","A","D","B",None,"C","B","F","A","B","A",
-"B","A","C",None,"B","A","D","B","C","B",None,"A","B","C","B","A",None,"D","B","C",
-"B","A","C","B",None,"A","D","B","C","B","A",None,"B","C","B","A","D","B",None,"C",
-"B","A","D","B","C",None,"A","B","C","B","A","D",None,"C","B","A","D","B","C",None,
-"B","A","C","B","D","B",None,"A","C","B","D","B","A",None,"C","B","A","D","B",None,
-"C","B","A","D","B"],
+# "Grade":["B","A",None,"C","B","B","Z","A",None,"B","A","D","B",None,"C","B","F","A","B","A",
+# "B","A","C",None,"B","A","D","B","C","B",None,"A","B","C","B","A",None,"D","B","C",
+# "B","A","C","B",None,"A","D","B","C","B","A",None,"B","C","B","A","D","B",None,"C",
+# "B","A","D","B","C",None,"A","B","C","B","A","D",None,"C","B","A","D","B","C",None,
+# "B","A","C","B","D","B",None,"A","C","B","D","B","A",None,"C","B","A","D","B",None,
+# "C","B","A","D","B"],
 
-"Department":["CS","IT",None,"CS","ECE","CS","Unknown","IT",None,"ME","CS","ECE","IT",None,"CS","ECE","CS","IT","ME","CS",
-"IT","CS","ECE",None,"CS","IT","ME","CS","ECE","IT",None,"CS","IT","ME","CS","ECE",None,"CS","IT","ME",
-"CS","ECE","IT","CS",None,"ME","CS","ECE","IT","CS","ME",None,"CS","IT","ECE","CS","ME","IT",None,"CS",
-"ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,
-"CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS",None,
-"ME","IT","CS","ECE","CS"],
+# "Department":["CS","IT",None,"CS","ECE","CS","Unknown","IT",None,"ME","CS","ECE","IT",None,"CS","ECE","CS","IT","ME","CS",
+# "IT","CS","ECE",None,"CS","IT","ME","CS","ECE","IT",None,"CS","IT","ME","CS","ECE",None,"CS","IT","ME",
+# "CS","ECE","IT","CS",None,"ME","CS","ECE","IT","CS","ME",None,"CS","IT","ECE","CS","ME","IT",None,"CS",
+# "ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,
+# "CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS","ME","IT",None,"CS","ECE","IT","CS",None,
+# "ME","IT","CS","ECE","CS"],
 
 "Project Score":[80,None,75,70,72,80,500,78,None,74,76,60,82,None,73,72,10,77,79,1000,
 80,75,70,None,72,78,74,76,60,82,None,73,72,10,77,79,80,75,None,72,
@@ -65,3 +65,18 @@ None,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214
 77,79,80,75,None,72,78,74,76,60,None,82,73,72,10,77,None,
 79,80,75,70,None]
 }
+max_len=max(len(v) for v in student_data.values())
+for key,value in student_data.items():
+    current_len=len(student_data[key])
+    if current_len < max_len:
+        student_data[key].extend([np.nan]*(max_len-current_len))
+
+
+
+df=pd.DataFrame.from_dict(student_data)
+print(df.shape)
+print(df.head())
+print(df.isnull().sum())
+
+df=df.fillna(df.mean())
+print(df.isnull().sum())
