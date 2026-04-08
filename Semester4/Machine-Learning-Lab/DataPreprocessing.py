@@ -1,6 +1,7 @@
 import pandas as pd
 import numpy as np
 
+# Sample dataset with missing values, duplicates, and outliers
 student_data = {
 "Student ID":[101,203,150,402,118,101,399,250,311,178,402,299,187,188,189,190,191,192,193,194,
 None,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214,
@@ -65,6 +66,8 @@ None,196,197,198,199,200,201,202,203,204,205,206,207,208,209,210,211,212,213,214
 77,79,80,75,None,72,78,74,76,60,None,82,73,72,10,77,None,
 79,80,75,70,None]
 }
+
+# Adding more elements to make the dataset larger
 max_len=max(len(v) for v in student_data.values())
 for key,value in student_data.items():
     current_len=len(student_data[key])
@@ -72,11 +75,45 @@ for key,value in student_data.items():
         student_data[key].extend([np.nan]*(max_len-current_len))
 
 
-
+# Converting to DataFrame
 df=pd.DataFrame.from_dict(student_data)
 print(df.shape)
 print(df.head())
 print(df.isnull().sum())
 
+# Handling missing values by filling with mean for numerical columns
 df=df.fillna(df.mean())
 print(df.isnull().sum())
+
+
+# removing duplicates based on 'Student ID'
+print(f"Total duplicates: {df['Student ID'].duplicated().sum()}")
+print("Dropping duplicates...")
+df.drop_duplicates(subset=['Student ID'], inplace=True)
+print(f"Total duplicates after dropping: {df['Student ID'].duplicated().sum()}")
+
+
+# Handling outliers using IQR method
+print("Handling outliers...")
+q1=df.quantile(0.25)
+q3=df.quantile(0.75)
+iqr=q3-q1
+print("First quartile (Q1):\n", q1)
+print("Third quartile (Q3):\n", q3)
+print("Interquartile range (IQR):\n", iqr)
+print(f'Outliers:\n {df[(df < (q1 - 1.5 * iqr)) | (df > (q3 + 1.5 * iqr))]}')
+print(f'Total Outliers:\n {df[(df < (q1 - 1.5 * iqr)) | (df > (q3 + 1.5 * iqr))].count()}')
+df_without_outliers=df[(df >= (q1 - 1.5 * iqr)) & (df <= (q3 + 1.5 * iqr))]
+df_without_outliers=df_without_outliers.dropna()
+print(f"Matrix after outliers removed:\n {df_without_outliers}")
+print(f"Shape after outliers removed: {df_without_outliers.shape}")
+
+
+# Min-Max Normalization
+print("Min-Max Normalization...")
+max=df.max()
+min=df.min()
+print("Max values:\n",max)
+print("\nMin values:\n",min)
+df_scaled=(df-min)/(max-min)
+print(f"Matrix after Normalization:\n {df_scaled}")
