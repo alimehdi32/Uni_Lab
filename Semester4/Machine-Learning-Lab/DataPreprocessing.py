@@ -117,3 +117,4 @@ print("Max values:\n",max)
 print("\nMin values:\n",min)
 df_scaled=(df-min)/(max-min)
 print(f"Matrix after Normalization:\n {df_scaled}")
+
