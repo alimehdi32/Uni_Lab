@@ -2,25 +2,14 @@
 
 print("Ali Mehdi - 24BCS008")
 
-num=100
-while(num<=999):
-    power = 0
-    temp = num
-    while (temp != 0):
-        power = power + 1
-        temp = temp // 10
+for num in range(100, 1000):
+    
+    d1 = num // 100           
+    d2 = (num // 10) % 10     
+    d3 = num % 10             
 
-    temp = num
-    newNum = 0
-    while (temp != 0):
-        digit = temp % 10
-        tempPower = power - 1
-        for i in range(tempPower):
-            digit = digit * digit
+    
+    if num == d1**3 + d2**3 + d3**3:
+        print(num, end=" ")
 
-        newNum = newNum + digit
-        temp = temp // 10
-
-    if newNum == num:
-        print(num)
-    #num=num+1
+print()  

@@ -1,11 +1,11 @@
 '''
 count vowels
 '''
-
+print("Ali Mehdi - 24BCS008")
 vowels = "aeiou"
 freq=0
 
-with open("file2.txt","r") as f:
+with open("9April2026/file2.txt","r") as f:
     content=f.read()
     for char in content:
         if char in vowels:

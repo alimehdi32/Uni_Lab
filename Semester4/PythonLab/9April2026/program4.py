@@ -1,7 +1,7 @@
 '''
 Write a program in python that counts the frequency of each character in a given string and displays the result.
 '''
-
+print("Ali Mehdi - 24BCS008")
 string=input("Enter a string: ")
 freq={}
 

@@ -10,7 +10,7 @@ while(num<=999):
             count=count+1
 
     if count==2:
-        print(num)
+        print(num, end=" ")
 
     num=num+1
 

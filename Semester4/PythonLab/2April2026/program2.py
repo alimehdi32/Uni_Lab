@@ -9,7 +9,7 @@ then perform
 
 
 
-
+print("Ali Mehdi - 24BCS008")
 score={}
 
 while True:

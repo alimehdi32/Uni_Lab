@@ -1,3 +1,4 @@
+print("Ali Mehdi - 24BCS008")
 list1=[1,1,1,2,2,8,5,5,7,7,7,7,3,3,3,4,9]
 unique=[]
 duplicate=[]

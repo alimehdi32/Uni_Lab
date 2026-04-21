@@ -1,12 +1,24 @@
-count=0
-highest=0
-sechighest=0
-while(count<10):
-    num=int(input("Enter a number: "))
-    if(num>highest):
-        highest=num
-    if(sechighest<num):
-        sechighest=num
-    count=count+1
+print("Ali Mehdi - 24BCS008")
+highest = None
+second_highest = None
 
-print(f'The highest number is: {highest}  & second highest number is: {sechighest}')
+print("Enter 10 numbers:")
+
+for i in range(10):
+    try:
+        num = float(input(f"Number {i+1}: "))
+    except ValueError:
+        print("Invalid input. Please enter a number.")
+        exit(1)
+
+    if highest is None or num > highest:
+        second_highest = highest
+        highest = num
+    elif second_highest is None or (num > second_highest and num != highest):
+        second_highest = num
+
+if second_highest is None:
+    print("All numbers are the same. No distinct second highest.")
+else:
+    print(f"Highest number: {highest}")
+    print(f"Second highest number: {second_highest}")

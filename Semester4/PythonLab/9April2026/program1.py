@@ -4,6 +4,7 @@ count and display the number of vowels, consonants, digits, and spaces present i
 both uppercase and lowercase vowels.
 '''
 
+print("Ali Mehdi - 24BCS008")
 string = input("Enter a string: ")
 vowels = 0
 consonants = 0

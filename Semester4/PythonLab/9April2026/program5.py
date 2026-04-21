@@ -1,7 +1,7 @@
 '''
 Write a python program to remove duplicate characters from a string while preserving the original order.
 '''
-
+print("Ali Mehdi - 24BCS008")
 string=input("Enter a string: ")
 freq={}
 
